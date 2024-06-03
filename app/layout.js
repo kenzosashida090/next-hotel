@@ -3,7 +3,11 @@ import Navigation from "@/app/_components/Navigation"
 
 import "@/app/_styles/globals.css"
 export const metadata = {
-  title: "The React Next",
+  title:{
+    template:"%s The Next Hotel", //exports the title of each page and replace the %s.
+    default:"Welcome / The Next Hotel" //By default the page that has not title will set as a default title
+  },
+  description:"Luxurius cabin hotel, located in the heart of Gotham City, sourranded by the beautiful Arkham Asylum" //Better CEO
 }
 
 //THE LAYOUT SHOULD RETURN LIKE  THIS WITH A HTML TAG BODY TAG AND A HEADER 

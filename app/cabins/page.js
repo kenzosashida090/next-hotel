@@ -1,11 +1,11 @@
-
+export const metadata = {
+    title:"Cabins"
+}
 
 async function  Page() {
   return (
     <div>
-      <ul>
-        {data.map((el)=> <li key={el.id}>{el.name}</li>)}
-      </ul>
+      <h1>Cabins</h1>
     </div>
     )
 }
