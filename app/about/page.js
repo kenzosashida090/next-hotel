@@ -1,7 +1,10 @@
+
+
 function page() {
     return (
         <div>
-            About page
+
+            <h1>About</h1>
         </div>
     )
 }
