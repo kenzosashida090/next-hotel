@@ -1,11 +1,11 @@
-import Logo from "@/app/_components/Logo"
-import Navigation from "@/app/_components/Navigation"
+
 import {Josefin_Sans} from "next/font/google"; // import fonts better performance if the fonts actual came from our server not from aniother like google
 const josefin = Josefin_Sans({
   subsets: ["latin"],
   display: "swap"
 }) // craeting font, returns an object with data of the font
 import "@/app/_styles/globals.css"
+import Header from "@/app/_components/Header";
 export const metadata = {
   title:{
     template:"%s The Next Hotel", //exports the title of each page and replace the %s.
@@ -18,15 +18,15 @@ export const metadata = {
 function RootLayout({children}) {
   return (
     <html lang="en">
-      <body className={`${josefin.className} bg-primary-950 text-primary-100 min-h-screen`}>
+      <body className={`${josefin.className} bg-primary-950 antialiased text-primary-100 min-h-screen flex flex-col`}>
         <header>
-          <Logo/>
+          <Header/>
         </header>
-        <Navigation/>
-        <main>
-          {children}
-        </main>
-        <footer>Copyright by Sashida&apos;s DEV</footer>
+        <div className="flex-1 px-8 py-12" >
+          <main className="max-w-7xl bg-red-300 mx-auto">
+            {children}
+          </main>
+        </div>
       </body>
     </html>
   )
