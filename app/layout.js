@@ -1,6 +1,10 @@
 import Logo from "@/app/_components/Logo"
 import Navigation from "@/app/_components/Navigation"
-
+import {Josefin_Sans} from "next/font/google"; // import fonts better performance if the fonts actual came from our server not from aniother like google
+const josefin = Josefin_Sans({
+  subsets: ["latin"],
+  display: "swap"
+}) // craeting font, returns an object with data of the font
 import "@/app/_styles/globals.css"
 export const metadata = {
   title:{
@@ -14,7 +18,7 @@ export const metadata = {
 function RootLayout({children}) {
   return (
     <html lang="en">
-      <body className="bg-primary-950 text-primary-100 min-h-screen">
+      <body className={`${josefin.className} bg-primary-950 text-primary-100 min-h-screen`}>
         <header>
           <Logo/>
         </header>
