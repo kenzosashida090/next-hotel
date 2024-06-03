@@ -43,6 +43,8 @@ function page() {
             className="object-cover"
             alt="Family sitting around a fire pit in front of cabin"
           />
+
+          {/* we use path string when the image actual came from our root */}
         </div>
   
         <div className="col-span-2">
