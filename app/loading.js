@@ -1,9 +1,6 @@
-function loading() {
-    return (
-        <div>
-            <p>Loading</p>
-        </div>
-    )
-}
+import Spinner  from "@/app/_components/Spinner"
 
+function loading() {
+    return <Spinner />
+}
 export default loading
