@@ -1,7 +1,9 @@
+import Spinner from "../_components/Spinner"
+
 function Loading() {
     return (
-        <div>
-            
+        <div className="items-center justify-center grid">
+            <Spinner/>
         </div>
     )
 }
