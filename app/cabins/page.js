@@ -4,7 +4,7 @@ import Spinner from "@/app/_components/Spinner"
 
 
 export const metadata = {
-    title:"Cabins"
+    title:"Cabins / "
 }
 
 function  Page() {

@@ -2,13 +2,19 @@ import { getCabin } from "@/app/_lib/data-service";
 import { EyeSlashIcon, MapPinIcon, UsersIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 
+//Generate dynamic metadata
 
+export async function generateMetadata({params}){
+  
+  const {name} = await getCabin(params.cabin_id)
+  return { title: `Cabin ${name}`}
+  /////////////
+}
 export default async function Page({params}) { // by default next pass as a prop the url params
-    const cabin = await getCabin(params.cabin_id)
-    const { id, name, max_capacity, regular_price, discount, image, description } =
+  const cabin = await getCabin(params.cabin_id)
+  const { id, name, max_capacity, regular_price, discount, image, description } =
     cabin;
-    console.log(params)
-
+   
   return (
     <div className="max-w-6xl mx-auto mt-8">
       <div className="grid grid-cols-[3fr_4fr] gap-20 border border-primary-800 py-3 px-10 mb-24">
