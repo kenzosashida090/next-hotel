@@ -16,7 +16,8 @@ export async function getCabin(id) {
 
   if (error) {
     console.error(error);
-    notFound(); //this is from the next Api redirect to the not found page
+    
+    notFound() //this is from the next Api redirect to the not found page
   }
 
   return data;

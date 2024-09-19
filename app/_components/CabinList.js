@@ -1,7 +1,10 @@
+//import { unstable_noStore as noStore } from "next/cache";
 import { getCabins } from "../_lib/data-service";
 import CabinCard from "./CabinCard"
 
 async function CabinList() {
+    //noStore(); Still experimental but this will work as a cache  component level
+    //noStore will no store cache and in every render will try to fetch to the server
     const cabins= await getCabins();
     if(!cabins.length) return null;
     return (

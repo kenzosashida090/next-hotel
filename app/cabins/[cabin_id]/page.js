@@ -1,5 +1,6 @@
-import { getCabin } from "@/app/_lib/data-service";
+import { getCabin, getCabins } from "@/app/_lib/data-service";
 import { EyeSlashIcon, MapPinIcon, UsersIcon } from "@heroicons/react/24/solid";
+
 import Image from "next/image";
 
 //Generate dynamic metadata
@@ -10,6 +11,19 @@ export async function generateMetadata({params}){
   return { title: `Cabin ${name}`}
   /////////////
 }
+
+export async function generateStaticParams() {
+  //This is a method to generate static pages
+  // we tell to next to "prefetch this data" to know the number of cabins that we have
+  //this will be more faster 
+  //also the name of this function its provided by next to identify  
+  const cabins = await getCabins()
+  
+  const ids = cabins.map((el)=>({cabin_id:String(el.id)}))
+  return ids;
+  
+}
+
 export default async function Page({params}) { // by default next pass as a prop the url params
   const cabin = await getCabin(params.cabin_id)
   const { id, name, max_capacity, regular_price, discount, image, description } =

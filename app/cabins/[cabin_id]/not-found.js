@@ -5,7 +5,7 @@ function NotFound() {
           This cabin could not be found :(
         </h1>
         <a
-          href='/cabins'
+          href='/cabins '
           className='inline-block bg-accent-500 text-primary-800 px-6 py-3 text-lg'
         >
           Go back to all cabins
