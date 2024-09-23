@@ -69,7 +69,7 @@ export async function getBooking(id) {
     .select('*')
     .eq('id', id)
     .single();
-
+   
   if (error) {
     console.error(error);
     throw new Error('Booking could not get loaded');
@@ -105,8 +105,8 @@ export async function getBookedDatesByCabinId(cabinId) {
   const { data, error } = await supabase
     .from('bookings')
     .select('*')
-    .eq('cabinId', cabinId)
-    .or(`startDate.gte.${today},status.eq.checked-in`);
+    .eq('cabin_id', cabinId)
+    .or(`start_date.gte.${today},status.eq.checked-in`);
 
   if (error) {
     console.error(error);
@@ -133,6 +133,7 @@ export async function getSettings() {
     console.error(error);
     throw new Error('Settings could not be loaded');
   }
+  await new Promise((res) => setTimeout(res, 5000));
 
   return data;
 }
