@@ -6,6 +6,7 @@ const josefin = Josefin_Sans({
 }) // craeting font, returns an object with data of the font
 import "@/app/_styles/globals.css"
 import Header from "@/app/_components/Header";
+import { ReservationProvider } from "./_components/ReservationContext";
 export const metadata = {
   title:{
     template:"%s The Next Hotel", //exports the title of each page and replace the %s.
@@ -22,7 +23,11 @@ function RootLayout({children}) {
           <Header/>
         <div className="flex-1 px-8 py-12 grid" >
           <main className="max-w-7xl  w-full mx-auto">
+          <ReservationProvider>
+          {/* This is fine because the layoutroot its a server component so  the children already be render on the server */}
+          {/*   Thats why we can wrap the entire pagesinto this context */}
             {children}
+          </ReservationProvider>
           </main>
         </div>
       </body>
