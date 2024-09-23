@@ -1,0 +1,43 @@
+:root{
+    --rdp-range_end-background:#000;
+}
+.rdp-caption {
+    
+    display: none;
+  }
+
+  .rdp-button_previous {
+    color: #000;
+  }
+
+  .rdp-chevron{
+      /* Cambia este color al que prefieras */
+    fill: #fff;  /* Cambia el color del texto si es necesario */
+  }
+
+  .rdp-day_button {
+    color:#fff;
+  }
+.rdp-range_start {
+    background: rgba(243, 164, 46, 0.589) !important;
+} 
+.rdp-range_end{
+  background: rgba(243, 164, 46, 0.589) !important;
+}
+  .rdp-range_start .rdp-day_button{
+    color: #fff;
+    background-color: #da8301 !important ;
+    border: none;
+}
+
+.rdp-range_end .rdp-day_button{
+    color: #fff;
+    background-color: #da8301 ;
+    border: none;
+}
+
+.rdp-selected{
+    background-color: rgba(243, 164, 46, 0.589) !important;
+    border-radius: 75%;
+}
+
