@@ -9,9 +9,9 @@ const initialState = {
 }
 export function ReservationProvider({children}){
     const [range,setRange] = useState(initialState)
-
+    const resetRange =  ()=> setRange(initialState) 
     return(
-        <ReservationContext.Provider value={{range,setRange}}>
+        <ReservationContext.Provider value={{range,setRange, resetRange}}>
             {children}
         </ReservationContext.Provider>
     )
