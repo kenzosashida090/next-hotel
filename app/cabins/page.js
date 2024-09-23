@@ -1,6 +1,8 @@
 import { Suspense } from "react"
-import CabinList from "@/app/_components/CabinList"
+
 import Spinner from "@/app/_components/Spinner"
+import Filter from "../_components/Filter"
+import CabinList from "../_components/CabinList";
 
 /////////////////////// THIS IS A ROUTE CACHE LEVEL
 // FULL ROUTE CACHE //
@@ -9,13 +11,18 @@ import Spinner from "@/app/_components/Spinner"
 //////////////////////
 
 //This is call incremental static regeneration (ISR)
-export const revalidate = 3600 // by this every hour will try to fetch to the server and render the new data
+//export const revalidate = 3600 // by this every hour will try to fetch to the server and render the new data
 
 export const metadata = {
     title:"Cabins / "
 }
-function  Page() {
+//seatchParams is passed by next as an objecet ?capacity=small
+// will return an object {capacity:"small"}
+// searchparams will set the page dinamyc and not static
+//const CabinList = dynamic(() => import("./CabinList"), { loading: ()=><Spinner/> });
 
+function  Page({searchParams}) {
+  const filter = searchParams?.capacity ?? "all";
 
   return (
     <div>
@@ -30,14 +37,18 @@ function  Page() {
         away from home. The perfect spot for a peaceful, calm vacation. Welcome
         to paradise.
       </p>
-
-      <Suspense fallback={<Spinner/>}> 
+      <div className="flex justify-end mb-8">
+        <Filter/>
+      </div>
+      <Suspense fallback={<Spinner/>} key={searchParams.capacity}> 
+      {/* All because react wraps all in a transaction suspense will not work when we set filters so we assign a key to allow the suspsense work again */}
       {/* Suspense needs to works outside the component that fetch in other words the fetching component will be set as a children of the Suspense component */}
-        <CabinList/>
+        <CabinList filter={filter}/>
       </Suspense>
     
     </div>
     )
 }
+
 
 export default Page
