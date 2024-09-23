@@ -3,6 +3,7 @@ import { Suspense } from "react"
 import Spinner from "@/app/_components/Spinner"
 import Filter from "../_components/Filter"
 import CabinList from "../_components/CabinList";
+import ReservationReminder from "../_components/ReservationReminder";
 
 /////////////////////// THIS IS A ROUTE CACHE LEVEL
 // FULL ROUTE CACHE //
@@ -44,6 +45,7 @@ function  Page({searchParams}) {
       {/* All because react wraps all in a transaction suspense will not work when we set filters so we assign a key to allow the suspsense work again */}
       {/* Suspense needs to works outside the component that fetch in other words the fetching component will be set as a children of the Suspense component */}
         <CabinList filter={filter}/>
+        <ReservationReminder />
       </Suspense>
     
     </div>
