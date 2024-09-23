@@ -3,7 +3,7 @@ import { auth } from "../_lib/auth"
 import Image from "next/image";
 
 async function Navigation() {
-  const session = await auth();
+  const session = await auth(); //create an instance of the actual session of the user
   console.log("===========",session)  
   return (
         <nav className="z-10 text-xl">
