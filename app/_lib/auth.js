@@ -1,6 +1,7 @@
 import NextAuth from "next-auth"
 
 import Google from "next-auth/providers/google"
+import { createGuest, getGuest } from "./data-service";
 
 const authConfig = {
     providers: [
@@ -13,6 +14,23 @@ const authConfig = {
         authorized({auth, request}){
             //authorized needs to return true/false 
             return !!auth?.user; //this is a way to transform to a boolean
+        },
+        async signIn({user,account,profile}){
+            //this function register the user in supabase if its the first signIn
+            try{
+              const existingGuest =   await getGuest(user.email)
+              if(!existingGuest){
+                await createGuest({email:user.email, full_name:user.name})
+              }
+              return true
+            }catch{
+                return false
+            }
+        },
+        async session({session, user}){
+            const guest = await getGuest(session.user.email)
+            session.user.guestId = guest.id
+            return session
         }
     },
     pages:{
