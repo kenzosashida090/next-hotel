@@ -6,6 +6,7 @@ import { auth } from "./auth";
 import { revalidatePath } from "next/cache";
 const regex = /^[a-zA-Z0-9]{6,12}$/;
 import supabase from "./supabase";
+
 export async function updateGuest(formData){
     const session = await auth()
     
