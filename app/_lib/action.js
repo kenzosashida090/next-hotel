@@ -36,6 +36,21 @@ export async function updateGuest(formData){
   revalidatePath("/account/profile")
   
 }
+
+export async function deleteReservation(bookingId){
+    const session = await auth();
+    if(!session) throw new Error("You need to sign in to delete a Reservation")
+    const guestBookings = await getBookings(session.user.guestId)
+    const bookingsIds = guestBookings.map((booking)=> booking.booking_id)
+    if(!bookingsIds.includes(bookingId)) throw new Error("You dont have that reservetion")
+    const { error } = await supabase.from('bookings').delete().eq('booking_id', bookingId);
+    
+    if (error) {
+	console.error(error);
+	throw new Error('Booking could not be deleted');
+    }
+   revalidatePath("/account/reservations")
+}
 export async function SignInAction(){
     await signIn("google", {redirectTo:"/account"})
 }
