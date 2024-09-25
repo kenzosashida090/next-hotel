@@ -1,23 +1,26 @@
 "use client"
 import { useState } from "react"
-
-function UpdateProfileForm({children}) {
+import { updateGuest } from "../_lib/action"; 
+function UpdateProfileForm({children, guest}) {
     const [count, setCount] = useState();
-    const countryFlag = "pt.jpg"
-    const nationality = "portugal"
+    const {full_name, email, national_id, country_flag} = guest;
     return (
-        <form className="bg-primary-900 py-8 px-12 text-lg flex gap-6 flex-col">
+        <form action={updateGuest} className="bg-primary-900 py-8 px-12 text-lg flex gap-6 flex-col">
         <div className="space-y-2">
           <label>Full name</label>
           <input
-            disabled
+	    defaultValue={full_name}
+            name={full_name}
+	    disabled
             className="px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm disabled:cursor-not-allowed disabled:bg-gray-600 disabled:text-gray-400"
           />
         </div>
 
-        <div className="space-y-2">
+	<div className="space-y-2">
           <label>Email address</label>
           <input
+	    name={email}
+	    defaultValue = {email}
             disabled
             className="px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm disabled:cursor-not-allowed disabled:bg-gray-600 disabled:text-gray-400"
           />
@@ -26,11 +29,11 @@ function UpdateProfileForm({children}) {
         <div className="space-y-2">
           <div className="flex items-center justify-between">
             <label htmlFor="nationality">Where are you from?</label>
-            {/* <img
-              src={countryFlag}
+            <img
+              src={country_flag}
               alt="Country flag"
               className="h-5 rounded-sm"
-            /> */}
+            /> 
           </div>
       
                 {children}
@@ -39,7 +42,8 @@ function UpdateProfileForm({children}) {
         <div className="space-y-2">
           <label htmlFor="nationalID">National ID number</label>
           <input
-            name="nationalID"
+	    defaultValue={ national_id }
+            name="national_id"
             className="px-5 py-3 bg-primary-200 text-primary-800 w-full shadow-sm rounded-sm"
           />
         </div>
