@@ -4,8 +4,10 @@
 import { signIn, signOut } from "./auth";
 import { auth } from "./auth";
 import { revalidatePath } from "next/cache";
-const regex = /^[a-zA-Z0-9]{6,12}$/;
+import { getBookings } from "./data-service";
 import supabase from "./supabase";
+
+const regex = /^[a-zA-Z0-9]{6,12}$/;
 
 export async function updateGuest(formData){
     const session = await auth()
