@@ -1,10 +1,7 @@
-"use client"
-import { useState } from "react"
-import { updateGuest } from "../_lib/action"; 
-import {useFormStatus} from "react-dom"
 
+import { updateGuest } from "../_lib/action"; 
+import Button from "./UpdateBookingForm";
 function UpdateProfileForm({children, guest}) {
-    const [count, setCount] = useState();
     const {full_name, email, national_id, country_flag} = guest;
     return (
         <form action={updateGuest} className="bg-primary-900 py-8 px-12 text-lg flex gap-6 flex-col">
@@ -51,20 +48,13 @@ function UpdateProfileForm({children, guest}) {
         </div>
 
         <div className="flex justify-end items-center gap-6">
-            <Button/>
+            <Button pendingLabel="Updating profile...">
+		Update profile
+	    </Button>
         </div>
       </form>
     )
 }
 
-function Button(){
-   //useFormStatus needs to be outside where the component form is
-    //thats why we created a custom button component
-   const {pending} = useFormStatus();
-    return(
-    <button disabled={pending} className="bg-accent-500 px-8 py-4 text-primary-800 font-semibold hover:bg-accent-600 transition-all disabled:cursor-not-allowed disabled:bg-gray-500 disabled:text-gray-300">
-       {pending ? "Updating...." : "Update profile"}
-    </button>
-   )
-}
+
 export default UpdateProfileForm

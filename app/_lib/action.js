@@ -5,6 +5,7 @@ import { signIn, signOut } from "./auth";
 import { auth } from "./auth";
 import { revalidatePath } from "next/cache";
 import { getBookings } from "./data-service";
+import { redirect } from "next/navigation";
 import supabase from "./supabase";
 
 const regex = /^[a-zA-Z0-9]{6,12}$/;
@@ -56,7 +57,33 @@ export async function deleteReservation(bookingId){
 export async function SignInAction(){
     await signIn("google", {redirectTo:"/account"})
 }
+export async function updateReservation(formData){
+    const session = await auth();
+    if(!session) throw new Error("You need to sign in to update a reservetion")
+    const bookingId = formData.get("booking_id")
+    const bookings = await getBookings(session.user.guestId)
+    const bookingIds = bookings.map((booking)=> booking.booking_id)
+    if(!bookingIds.includes(Number(bookingId))) throw new Error("You dont have this reservation")
+    const num_guests = formData.get("num_guests")
+    const observations = formData.get("observations")
+    const updatedFields = {
+	num_guests,
+	observations
+    }
+    const { error } = await supabase
+	.from('bookings')
+	.update(updatedFields)
+	.eq('booking_id', bookingId)
+	.select()
+	.single();
 
+  if (error) {
+    console.error(error);
+    throw new Error('Booking could not be updated');
+  }
+    
+    redirect("/account/reservations")
+}
 export async function signOutAction(params) {
     await signOut({redirectTo:"/"})
 }
