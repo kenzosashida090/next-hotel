@@ -24,7 +24,6 @@ const {range,setRange, resetRange} = useReservation()
   const cabin_price = num_nights * (regular_price - discount)
   // SETTINGS
   const {minBookingLength, maxBookingLength} = settings;
-
   return (
     <div className="flex flex-col">
       <DayPicker

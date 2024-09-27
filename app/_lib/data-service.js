@@ -97,6 +97,7 @@ export async function getBookings(guestId) {
 }
 
 export async function getBookedDatesByCabinId(cabinId) {
+  console.log("this is from cabin ID", cabinId)
   let today = new Date();
   today.setUTCHours(0, 0, 0, 0);
   today = today.toISOString();
@@ -107,7 +108,7 @@ export async function getBookedDatesByCabinId(cabinId) {
     .select('*')
     .eq('cabin_id', cabinId)
     .or(`start_date.gte.${today},status.eq.checked-in`);
-
+  
   if (error) {
     console.error(error);
     throw new Error('Bookings could not get loaded');
@@ -117,12 +118,12 @@ export async function getBookedDatesByCabinId(cabinId) {
   const bookedDates = data
     .map((booking) => {
       return eachDayOfInterval({
-        start: new Date(booking.startDate),
-        end: new Date(booking.endDate),
+        start: new Date(booking.start_date),
+        end: new Date(booking.end_date),
       });
     })
     .flat();
-
+    console.log("bookeddates", bookedDates, bookedDates.length)
   return bookedDates;
 }
 

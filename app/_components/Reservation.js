@@ -2,13 +2,11 @@ import { auth } from "../_lib/auth"
 import { getBookedDatesByCabinId, getSettings } from "../_lib/data-service"
 import DateSelector from "./DateSelector"
 import LoginMessage from "./LoginMessage"
-import { ReservationProvider } from "./ReservationContext"
 import ReservationForm from "./ReservationForm"
 
 
  async function Reservation({cabin}) {
     const [settings,bookedDates] = await Promise.all([ getSettings(), getBookedDatesByCabinId(cabin.id)  ])
-    console.log("===========bokeddates", bookedDates)
     const session = await auth()
     return (
         <>

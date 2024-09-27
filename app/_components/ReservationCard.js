@@ -3,10 +3,13 @@ import { format, formatDistance, isPast, isToday, parseISO } from 'date-fns';
 import DeleteReservation from './DeleteReservation';
 import Image from 'next/image';
 import Link from 'next/link';
-export const formatDistanceFromNow = (dateStr) =>
-  formatDistance(parseISO(dateStr), new Date(), {
+export const formatDistanceFromNow = (dateStr) =>{
+
+  return formatDistance(parseISO(dateStr), new Date(), {
     addSuffix: true,
   }).replace('about ', '');
+
+}
 
 function ReservationCard({ booking, onDelete }) {
   const {

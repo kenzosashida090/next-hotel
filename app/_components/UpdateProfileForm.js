@@ -1,6 +1,6 @@
 
 import { updateGuest } from "../_lib/action"; 
-import Button from "./UpdateBookingForm";
+import Button from "./SubmitButton";
 function UpdateProfileForm({children, guest}) {
     const {full_name, email, national_id, country_flag} = guest;
     return (
