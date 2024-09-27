@@ -1,9 +1,10 @@
 "use client"
-import { isWithinInterval } from "date-fns";
+import { isWithinInterval, differenceInDays, isPast, isToday} from "date-fns";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import "./datestyle.css";
 import { useReservation } from "./ReservationContext";
+
 function isAlreadyBooked(range, datesArr) {
   return (
     range.from &&
@@ -17,12 +18,10 @@ function isAlreadyBooked(range, datesArr) {
 function DateSelector({settings, bookedDates, cabin}) {
 const {range,setRange, resetRange} = useReservation()
   // CHANGE
-  const regularPrice = 23;
-  const discount = 23;
-  const numNights = 23;
-  const cabinPrice = 23;
-
-
+  const {regular_price, discount} = cabin;
+  const displayRange = isAlreadyBooked(range, bookedDates) ? {} : range
+  const num_nights = differenceInDays(displayRange.to, displayRange.from)
+  const cabin_price = num_nights * (regular_price - discount)
   // SETTINGS
   const {minBookingLength, maxBookingLength} = settings;
 
@@ -31,12 +30,14 @@ const {range,setRange, resetRange} = useReservation()
       <DayPicker
         className="pt-12 place-self-center "
         mode="range"
-        selected={range}
+        selected={displayRange}
         defaultMonth={new Date()} // Para establecer el mes inicial mostrado
-        disabled={{ before: new Date() }} // Deshabilita fechas anteriores a hoy
         numberOfMonths={2} // Muestra dos meses
         captionLayout="dropdown" // Si sigue disponible en la versión usada
-        onSelect={(range)=>setRange(range)}
+	  onSelect={(range)=>{
+      if(!range) return
+      setRange(range)}}
+	disabled={(curDate)=> isPast(curDate) || bookedDates.some((date)=> isToday(date, curDate))}
       />
 
       <div className="flex items-center justify-between px-8 bg-accent-500 mt-2 text-primary-800 h-[72px]">
@@ -44,24 +45,24 @@ const {range,setRange, resetRange} = useReservation()
           <p className="flex gap-2 items-baseline">
             {discount > 0 ? (
               <>
-                <span className="text-2xl">${regularPrice - discount}</span>
+                <span className="text-2xl">${regular_price - discount}</span>
                 <span className="line-through font-semibold text-primary-700">
-                  ${regularPrice}
+                  ${regular_price}
                 </span>
               </>
             ) : (
-              <span className="text-2xl">${regularPrice}</span>
+              <span className="text-2xl">${regular_price}</span>
             )}
             <span className="">/night</span>
           </p>
-          {numNights ? (
+          {num_nights ? (
             <>
               <p className="bg-accent-600 px-3 py-2 text-2xl">
-                <span>&times;</span> <span>{numNights}</span>
+                <span>&times;</span> <span>{num_nights}</span>
               </p>
               <p>
                 <span className="text-lg font-bold uppercase">Total</span>{" "}
-                <span className="text-2xl font-semibold">${cabinPrice}</span>
+                <span className="text-2xl font-semibold">${cabin_price}</span>
               </p>
             </>
           ) : null}

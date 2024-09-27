@@ -19,25 +19,32 @@
     color:#fff;
   }
 .rdp-range_start {
-    background: rgba(243, 164, 46, 0.589) !important;
+    background: rgba(192, 125, 24, 0.589) !important;
+    border-top-left-radius: 60px;
+    border-bottom-left-radius: 70px;
 } 
 .rdp-range_end{
-  background: rgba(243, 164, 46, 0.589) !important;
+  border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+  background: rgba(192, 125, 24, 0.589) !important;
 }
   .rdp-range_start .rdp-day_button{
     color: #fff;
-    background-color: #da8301 !important ;
+    background-color:rgba(192, 125, 24, 0.589) !important;;
     border: none;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
 .rdp-range_end .rdp-day_button{
     color: #fff;
-    background-color: #da8301 ;
+    background-color:rgba(192, 125, 24, 0.589) !important;;    
     border: none;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
 }
 
 .rdp-selected{
-    background-color: rgba(243, 164, 46, 0.589) !important;
-    border-radius: 75%;
-}
+    background-color: rgba(192, 125, 24, 0.884) !important;
+  }
 
